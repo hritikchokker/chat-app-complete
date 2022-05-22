@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --primary-blue: rgb(93, 93, 240);
+  --primary-white: #fff;
+}
+
+.container {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+}
+
+.row-jc-ac {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.form-field {
+  padding: 20px 0;
+  width: 100%;
+  input {
+    width: 90%;
+    padding: 10px 0;
+    border-radius: 20px;
+    outline: none;
+    text-align: center;
+  }
+}
+
+.card-shadow {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #622774 0%, #c53364 100%);
+}
+.w-80 {
+  width: 80%;
+}
+.w-90 {
+  width: 90%;
+}
+.w-40 {
+  width: 40%;
+}
+.w-50 {
+  width: 50%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-10 {
+  margin-top: 20px;
+}
+
+.form-action {
+  padding: 20px 0;
+  button {
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--primary-blue);
+    color: var(--primary-white);
+    outline: none;
+    border: none;
+  }
+  button:hover {
+    background-color: rgb(71, 221, 71);
+    color: var(--primary-white);
+  }
+}
+
+.form-helper {
+  color: var(--primary-white);
+  a {
+    color: var(--primary-blue);
+    text-decoration: none;
+  }
+}

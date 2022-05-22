@@ -5,16 +5,33 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "start:api": "nx serve api",
+    "start:frontend": "nx serve client"
   },
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.5",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-redux": "^8.0.1",
     "react-router-dom": "6.3.0",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1",
     "regenerator-runtime": "0.13.7",
+    "sequelize": "^6.19.2",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
