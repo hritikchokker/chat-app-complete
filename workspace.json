@@ -4,7 +4,7 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
-    "chat": "apps/chat",
-    "chat-e2e": "apps/chat-e2e"
+    "client": "apps/client",
+    "client-e2e": "apps/client-e2e"
   }
 }

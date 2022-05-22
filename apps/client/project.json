@@ -1,6 +1,6 @@
 {
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
-  "sourceRoot": "apps/chat/src",
+  "sourceRoot": "apps/client/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,14 +9,14 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/chat",
-        "index": "apps/chat/src/index.html",
+        "outputPath": "dist/apps/client",
+        "index": "apps/client/src/index.html",
         "baseHref": "/",
-        "main": "apps/chat/src/main.tsx",
-        "polyfills": "apps/chat/src/polyfills.ts",
-        "tsConfig": "apps/chat/tsconfig.app.json",
-        "assets": ["apps/chat/src/favicon.ico", "apps/chat/src/assets"],
-        "styles": ["apps/chat/src/styles.scss"],
+        "main": "apps/client/src/main.js",
+        "polyfills": "apps/client/src/polyfills.js",
+        "tsConfig": "apps/client/tsconfig.app.json",
+        "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
+        "styles": ["apps/client/src/styles.scss"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
@@ -30,8 +30,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/chat/src/environments/environment.ts",
-              "with": "apps/chat/src/environments/environment.prod.ts"
+              "replace": "apps/client/src/environments/environment.js",
+              "with": "apps/client/src/environments/environment.prod.js"
             }
           ],
           "optimization": true,
@@ -47,16 +47,15 @@
       "executor": "@nrwl/web:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "chat:build",
-        "hmr": true,
-        "proxyConfig": "apps/chat/proxy.conf.json"
+        "buildTarget": "client:build",
+        "hmr": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "chat:build:development"
+          "buildTarget": "client:build:development"
         },
         "production": {
-          "buildTarget": "chat:build:production",
+          "buildTarget": "client:build:production",
           "hmr": false
         }
       }
@@ -65,14 +64,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/chat/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/client/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/chat"],
+      "outputs": ["coverage/apps/client"],
       "options": {
-        "jestConfig": "apps/chat/jest.config.ts",
+        "jestConfig": "apps/client/jest.config.js",
         "passWithNoTests": true
       }
     }

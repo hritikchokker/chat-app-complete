@@ -46,5 +46,5 @@
       }
     }
   },
-  "defaultProject": "chat"
+  "defaultProject": "client"
 }
