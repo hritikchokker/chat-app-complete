@@ -71,7 +71,6 @@ export class UserController {
         ...userSession.toJSON(),
       });
     } catch (error) {
-      
       return responseHandler.sendResponse(res, 400, { ...error });
     }
   }
@@ -203,7 +202,6 @@ export class UserController {
     res: Response
   ) {
     try {
-      console.log('user list called');
       const { sequeLizeInstance } = req.sequelize;
       if (!req?.sequelize) {
         return responseHandler.sendResponse(res, 500, {
@@ -211,12 +209,11 @@ export class UserController {
         });
       }
       const userModel = sequeLizeInstance.models.user;
-      const sessionModel = sequeLizeInstance.models.sessionHistory;
-      const data = await userModel.findAll();
-      const sessionData = await sessionModel.findAll();
+      const data = await userModel.findAll({
+        attributes: { exclude: ['password'] },
+      });
       return responseHandler.sendResponse(res, 200, {
-        userList: data,
-        sessionData,
+        data,
       });
     } catch (error) {
       return responseHandler.sendResponse(res, 400, { ...error });

@@ -18,7 +18,7 @@ const server = httpServer.listen(port, () => {
     const db = new Database();
     await db.connectToDb();
     await db.verifyConnection();
-    await db.syncToDb(true); // pass true to clear database
+    await db.syncToDb(); // pass true to clear database
     updateDatabaseInstance(db);
     db.setAssociation('user', 'sessionHistory');
     // await db.dropTable(['sessionHistory']);

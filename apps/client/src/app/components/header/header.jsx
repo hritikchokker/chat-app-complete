@@ -27,6 +27,17 @@ function Header() {
         </li>
         <li>
           <a
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/dashboard/user', { replace: true });
+            }}
+            href={href}
+          >
+            User
+          </a>
+        </li>
+        <li>
+          <a
             href={href}
             onClick={(e) => {
               e.preventDefault();

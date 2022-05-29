@@ -25,10 +25,16 @@ export class SocketManager {
     });
     this.dbInstance = db;
     this.onConnection();
-    this.io.use(middleware.bind(this, db.Sequelize));
+    this.io.use((socket, next) => {
+      middleware(socket, this.dbInstance, next);
+    });
   }
 
   private listenAll(socket: ISocket): void {
+    const getUserProfile = () => {
+      socket.emit('userDetailsRecieved', (socket as any).user);
+      return;
+    };
     socket.emit(
       'hello_world',
       'Hello world. your connection is created. message received from node app'
@@ -36,6 +42,7 @@ export class SocketManager {
     socket.on('msgToServer', (data) => {
       console.log(data, 'daa');
     });
+    socket.on('fetchUserDetails', getUserProfile);
   }
 
   private onConnection(): void {

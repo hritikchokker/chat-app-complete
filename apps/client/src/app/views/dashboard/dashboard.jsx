@@ -7,10 +7,14 @@ import socketHandler, {
   createInstance,
 } from '../../utils/socket/socketInstance';
 import '../../app.module.scss';
+import { useDispatch } from 'react-redux';
+import { updateUserDetails } from './state/actions';
 const Homepage = React.lazy(() => import('./homepage/homepage'));
 const ChatPage = React.lazy(() => import('./chat/chat'));
+const UserPage = React.lazy(() => import('./user/user'));
 function Dashboard() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   React.useEffect(() => {
     createInstance();
     setTimeout(() => {
@@ -19,7 +23,7 @@ function Dashboard() {
       });
       socketHandler.emit('fetchUserDetails');
       socketHandler.on('userDetailsRecieved', (data) => {
-        console.log(data, 'fetched from socket directly');
+        dispatch(updateUserDetails(data));
       });
     });
     socketHandler.on('connect_error', () => {
@@ -31,7 +35,7 @@ function Dashboard() {
     };
   }, []);
   return (
-    <>
+    <React.Fragment>
       <Header />
       <main className="main">
         <Routes>
@@ -40,6 +44,14 @@ function Dashboard() {
             element={
               <React.Suspense fallback={<Loader />}>
                 <Homepage />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/user/*"
+            element={
+              <React.Suspense fallback={<Loader />}>
+                <UserPage />
               </React.Suspense>
             }
           />
@@ -54,7 +66,7 @@ function Dashboard() {
         </Routes>
       </main>
       <Footer />
-    </>
+    </React.Fragment>
   );
 }
 

@@ -48,6 +48,14 @@ export const UserModel = (sequelize: Sequelize) => {
           max: 25,
         },
       },
+      isOnline: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      lastSeen: {
+        type: DataTypes.TEXT,
+        defaultValue: new Date().toISOString(),
+      },
       status: {
         type: DataTypes.STRING,
         values: ['active', 'blocked', 'inactive', 'deleted'],

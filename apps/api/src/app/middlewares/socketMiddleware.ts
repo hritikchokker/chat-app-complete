@@ -6,9 +6,13 @@ const tokenService = new TokenManager();
 const middleware = async (
   socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>,
   sequeLizeInstance,
-  next,
+  next
 ) => {
   try {
+    if ((socket as any)?.user) {
+      next();
+      return;
+    }
     if (!sequeLizeInstance) {
       const err = new Error('not authorized') as any;
       err.data = { content: 'Please retry later' }; // additional details
