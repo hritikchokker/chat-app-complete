@@ -16,6 +16,7 @@ export type ConfigModel = {
   MAIL_USERNAME: string;
   MAIL_PASSWORD: string;
   MAIL_FROM_ID: string;
+  ALLOWED_METHODS: string;
 };
 
 export const config = dotenv.config()?.parsed as unknown as ConfigModel;

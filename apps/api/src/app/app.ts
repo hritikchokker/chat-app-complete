@@ -17,3 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(router);
+
+process.on('uncaughtException', (err) => {
+  console.log(err, 'fuck');
+});

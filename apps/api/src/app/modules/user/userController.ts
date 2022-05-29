@@ -71,7 +71,7 @@ export class UserController {
         ...userSession.toJSON(),
       });
     } catch (error) {
-      console.log(error, 'errorr');
+      
       return responseHandler.sendResponse(res, 400, { ...error });
     }
   }
@@ -203,6 +203,7 @@ export class UserController {
     res: Response
   ) {
     try {
+      console.log('user list called');
       const { sequeLizeInstance } = req.sequelize;
       if (!req?.sequelize) {
         return responseHandler.sendResponse(res, 500, {

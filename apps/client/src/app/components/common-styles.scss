@@ -1,0 +1,43 @@
+header {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  background-color: rgb(201, 59, 59);
+}
+
+.list_wrapper{
+    display: flex;
+    list-style: none;
+    width: 100%;
+    
+    li{
+        width: 30%;
+        padding: 20px ;
+        a{
+            font-size: 18px;
+            text-decoration: none;
+            color: #fff;
+        }
+        a:hover{
+            cursor: pointer;
+            border-bottom: 2px solid black;
+        }
+    }
+}
+
+.logout_wrapper{
+    padding: 20px;
+     a{
+            font-size: 18px;
+            text-decoration: none;
+            color: #fff;
+        }
+        a:hover{
+            cursor: pointer;
+            border-bottom: 2px solid black;
+        }
+}
+
+.toaster_container{
+    
+}

@@ -1,14 +1,10 @@
-import { CommonReducer } from './commonReducer';
-import { configureStore } from '@reduxjs/toolkit';
-// import { combineReducers, createStore } from 'redux';
-// const reducer = combineReducers({
-//   globalState: CommonReducer,
-// });
-// const store = createStore(reducer);
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from './reducers';
+const middleware = [thunk];
 
-export const store = configureStore({
-  reducer: {
-    globalReducer: CommonReducer,
-  },
-  middleware: [],
-});
+export const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middleware))
+);

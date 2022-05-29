@@ -1,29 +1,22 @@
-import * as axiosInstance from 'axios';
-
-export const axios = axiosInstance.create({
-  baseURL: 'http://localhost:3333/api/v1',
-  timeout: 10000,
-});
-axios.interceptors.request.use(
-  function (config) {
-    // debugger;
-    if (localStorage.getItem('token')) {
-      // config.headers.Authorization = JSON.parse(localStorage.getItem("token"));
-      config.headers.Authorization = localStorage.getItem('token');
-    }
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
+import axiosInstance from '../utils/axiosInstance/axiosInstance';
+class HttpService {
+  get(url, configs) {
+    return axiosInstance.get(url);
   }
-);
 
-axios.interceptors.response.use(
-  function (response) {
-    return response && response.data;
-  },
-  function (error) {
-    return Promise.reject(error);
+  post(url, payload, configs = null) {
+    return axiosInstance.post(url, payload);
   }
-);
+  put(url, payload, configs = null) {
+    return axiosInstance.put(url, payload);
+  }
+  patch(url, payload, configs = null) {
+    return axiosInstance.patch(url, payload);
+  }
+
+  delete(url, configs = null) {
+    return axiosInstance.delete(url);
+  }
+}
+
+export default new HttpService();

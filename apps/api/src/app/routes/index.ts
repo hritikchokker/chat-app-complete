@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 export const router = Router();
 
-router.get('/api/v1', (req, res) => {
+router.all('/api/v1', (req, res) => {
   res.send({ message: 'Welcome to api!' });
 });
 router.use('/api/v1/user', userRouter);
