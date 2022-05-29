@@ -8,7 +8,7 @@ export class TokenManager {
     });
     // return new Promise((resolve, reject) => {});
   }
-  async decodeToken(token: string): Promise<unknown> {
+  async decodeToken(token: string): Promise<any> {
     return decode(token, { complete: true })?.payload;
   }
 }

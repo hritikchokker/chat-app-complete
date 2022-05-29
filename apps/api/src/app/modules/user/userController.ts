@@ -1,4 +1,4 @@
-import { Sequelize, Op } from 'sequelize';
+import { Sequelize } from 'sequelize';
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { ResponseHandler } from '../../utils/ResponseHandler';
@@ -148,8 +148,34 @@ export class UserController {
     // const model = this.getModelFromInstance(req.sequelize);
   }
 
-  async getUserProfile(req: Request & { sequelize: Sequelize }, res: Response) {
-    // const model = this.getModelFromInstance(req.sequelize);
+  async getUserProfile(
+    req: Request & { sequelize: { sequeLizeInstance: Sequelize } },
+    res: Response
+  ) {
+    try {
+      const { sequeLizeInstance } = req.sequelize;
+      if (!sequeLizeInstance) {
+        return responseHandler.sendResponse(res, 500, {
+          error: 'something went wrong',
+        });
+      }
+      const userModel = sequeLizeInstance.models.user;
+      if (!req?.headers?.authorization) {
+        return responseHandler.sendResponse(res, 401, {
+          message: 'no auth token found',
+        });
+      }
+      const { uid } = await tokenService.decodeToken(
+        req?.headers?.authorization
+      );
+      const userDetails = await (await userModel.findByPk(uid))?.toJSON();
+      return responseHandler.sendResponse(res, 200, {
+        message: 'user profile fetched succesfully',
+        data: userDetails,
+      });
+    } catch (error) {
+      return responseHandler.sendResponse(res, 400, { ...error });
+    }
   }
 
   async forgotPassword(
@@ -213,6 +239,7 @@ export class UserController {
         attributes: { exclude: ['password'] },
       });
       return responseHandler.sendResponse(res, 200, {
+        count: data.length,
         data,
       });
     } catch (error) {
