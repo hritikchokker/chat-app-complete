@@ -65,7 +65,7 @@ function Dashboard() {
           />
         </Routes>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </React.Fragment>
   );
 }

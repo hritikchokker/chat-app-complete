@@ -18,3 +18,5 @@ router.post('/forgot-password', userController.forgotPassword);
 
 router.post('/reset-password', userController.resetPasswordHandler);
 router.get('/logout', userController.logout);
+
+router.get('/:uid', userController.getOtherUserProfile);

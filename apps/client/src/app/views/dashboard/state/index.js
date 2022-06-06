@@ -3,6 +3,7 @@ const initialState = {
   user: {},
   token: null,
   usersList: [],
+  userDetails: {},
   isloading: false,
 };
 export function dashboardState(state = initialState, action) {
@@ -17,6 +18,21 @@ export function dashboardState(state = initialState, action) {
       return {
         ...state,
         usersList: action.payload,
+      };
+    case DashboardActions.GET_USERS_DETAILS:
+      return {
+        ...state,
+        userDetails: state.usersList.find((el) => el.uid === action.payload),
+      };
+    case DashboardActions.GET_USERS_DETAILS_SUCCESS:
+      return {
+        ...state,
+        userDetails: action.payload,
+      };
+    case DashboardActions.GET_USERS_DETAILS_FAILURE:
+      return {
+        ...state,
+        userDetails: {},
       };
     default:
       return state;

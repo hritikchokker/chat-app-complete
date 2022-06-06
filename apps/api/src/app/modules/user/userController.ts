@@ -178,6 +178,43 @@ export class UserController {
     }
   }
 
+  async getOtherUserProfile(
+    req: Request & { sequelize: { sequeLizeInstance: Sequelize } },
+    res: Response
+  ) {
+    try {
+      const { sequeLizeInstance } = req.sequelize;
+      if (!sequeLizeInstance) {
+        return responseHandler.sendResponse(res, 500, {
+          error: 'something went wrong',
+        });
+      }
+      const userModel = sequeLizeInstance.models.user;
+      if (!req?.headers?.authorization) {
+        return responseHandler.sendResponse(res, 401, {
+          message: 'no auth token found',
+        });
+      }
+      if (req?.params?.uid) {
+        const userDetails = await (
+          await userModel.findByPk(req?.params?.uid, {
+            attributes: { exclude: ['password'] },
+          })
+        )?.toJSON();
+        return responseHandler.sendResponse(res, 200, {
+          message: 'user profile fetched succesfully',
+          data: userDetails,
+        });
+      }
+      return responseHandler.sendResponse(res, 400, {
+        message: 'No Params found',
+        data: {},
+      });
+    } catch (error) {
+      return responseHandler.sendResponse(res, 400, { ...error });
+    }
+  }
+
   async forgotPassword(
     req: Request & { sequelize: { sequeLizeInstance: Sequelize } },
     res: Response
