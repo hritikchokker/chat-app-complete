@@ -56,7 +56,7 @@ function Dashboard() {
             }
           />
           <Route
-            path="/chat"
+            path="/chat/:userId"
             element={
               <React.Suspense fallback={<Loader />}>
                 <ChatPage />

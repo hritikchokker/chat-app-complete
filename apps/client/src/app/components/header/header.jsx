@@ -36,7 +36,7 @@ function Header() {
             User
           </a>
         </li>
-        <li>
+        {/* <li>
           <a
             href={href}
             onClick={(e) => {
@@ -46,7 +46,7 @@ function Header() {
           >
             Chat
           </a>
-        </li>
+        </li> */}
       </ul>
       <div className="logout_wrapper">
         <a href={href} onClick={handleLogout}>

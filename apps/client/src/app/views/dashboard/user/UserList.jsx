@@ -12,8 +12,13 @@ function UserList() {
     dispatch(fetchUsersList());
   }, [dispatch]);
   const userDetailMem = (details) => new Map(Object.entries(details));
-  const navigateToDetails = (userDetails) => {
+  const navigateToDetails = (userDetails, flag) => {
+    if (flag) {
+      navigate(`/dashboard/chat/${userDetails.get('uid')}`);
+      return;
+    }
     navigate(`/dashboard/user/${userDetails.get('uid')}`);
+    return;
   };
   return (
     <div className="list_container">

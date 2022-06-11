@@ -1,8 +1,7 @@
 import React from 'react';
 function UserCard({ userDetails = {}, navigateToDetails, isDetails = false }) {
-  console.log(userDetails, 'user details');
-  const clickHandler = () => {
-    navigateToDetails(userDetails);
+  const clickHandler = (flag = false) => {
+    navigateToDetails(userDetails, flag);
   };
   return (
     <div className="list_container_card">
@@ -17,7 +16,10 @@ function UserCard({ userDetails = {}, navigateToDetails, isDetails = false }) {
       {!isDetails && (
         <div className="list_container_card_actions">
           <div className="list_container_card_actions_btn">
-            <button onClick={clickHandler}>show details</button>
+            <button onClick={() => clickHandler()}>show details</button>
+          </div>
+          <div className="list_container_card_actions_btn">
+            <button onClick={() => clickHandler(true)}>message</button>
           </div>
         </div>
       )}
