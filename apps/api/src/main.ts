@@ -24,7 +24,7 @@ const server = httpServer.listen(port, () => {
     // await db.dropTable(['sessionHistory']);
     await db.syncAllModels();
     new SocketManager(httpServer, db.sequeLizeInstance);
-    // db.showAllModels();
+    db.showAllModels();
     logger.success(
       '*****************connected to db successfully****************'
     );

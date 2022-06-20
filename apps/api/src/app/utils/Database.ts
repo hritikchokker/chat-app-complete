@@ -1,6 +1,12 @@
 import { Sequelize } from 'sequelize';
 import { config } from '../config';
-import { UserModel, SessionModel } from '../models';
+import {
+  UserModel,
+  SessionModel,
+  ChatInboxModel,
+  ChatMessagesModel,
+  ChatRoomModel,
+} from '../models';
 
 export class Database {
   sequeLizeInstance: Sequelize;
@@ -19,6 +25,10 @@ export class Database {
       this.sequeLizeInstance = sequelize;
       this.sequeLizeInstance.models['user'] = UserModel(sequelize);
       this.sequeLizeInstance.models['sessionHistory'] = SessionModel(sequelize);
+      this.sequeLizeInstance.models['chatInbox'] = ChatInboxModel(sequelize);
+      this.sequeLizeInstance.models['chatRoom'] = ChatRoomModel(sequelize);
+      this.sequeLizeInstance.models['chatMessage'] =
+        ChatMessagesModel(sequelize);
       return sequelize;
     } catch (error) {
       Promise.reject(error);
@@ -69,23 +79,6 @@ export class Database {
     // toModel.belongsTo(fromModel);
     fromModel.hasMany(toModel, { foreignKey: 'userId' });
     toModel.belongsTo(fromModel, { foreignKey: 'userId' });
-    // this.sequeLizeInstance.getQueryInterface().addConstraint(from, {
-    //   fields: ['userId'],
-    //   type: 'foreign key',
-    //   name: 'userId',
-    //   references: {
-    //     table: 'sessionHistory',
-    //     field: 'userId',
-    //   },
-    //   onDelete: 'cascade',
-    //   onUpdate: 'cascade',
-    // });
-    // toModel.hasMany(fromModel, {
-    //   foreignKey: 'sessionId',
-    // });
-    // fromModel.belongsTo(toModel, {
-    //   foreignKey: 'sessionId',
-    // });
   }
   showAllModels(): void {
     console.log(this.sequeLizeInstance.models, '******** ALL Models');

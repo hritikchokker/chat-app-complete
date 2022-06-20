@@ -4,7 +4,8 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { config } from '../config';
 import { Sequelize } from 'sequelize/types';
 import middleware from '../middlewares/socketMiddleware';
-type ISocket = SocketServer<
+import { ChatManager } from '../common/ChatManager';
+export type ISocket = SocketServer<
   DefaultEventsMap,
   DefaultEventsMap,
   DefaultEventsMap,
@@ -43,6 +44,7 @@ export class SocketManager {
       console.log(data, 'daa');
     });
     socket.on('fetchUserDetails', getUserProfile);
+    new ChatManager(socket, this.dbInstance);
   }
 
   private onConnection(): void {
