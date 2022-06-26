@@ -24,7 +24,11 @@ function ChatBody() {
       socketInstance.emit('create/update_room', {
         roomId: getRoomId(userDetails.uid, userId),
       });
-      socketInstance.on('message_list', (list) => {
+      socketInstance.on('message_list', (lists) => {
+        const { roomId, list } = lists;
+        if (roomId === getRoomId(userDetails.uid, userId)) {
+          setList(list);
+        }
         console.log(list, 'on message list');
       });
     }
@@ -47,10 +51,11 @@ function ChatBody() {
     //     setList(listArr);
     //   });
   }, [roomId, userDetails.uid, userId]);
+  console.log(list,'message list main page');
   return (
     <div className="chat_wrapper_m_content_body">
       {list.map((el) => (
-        <p key={el}>{el}</p>
+        <p key={el.messageId}>{el.message}</p>
       ))}
       {isOtherUserTyping && <h4>....typing</h4>}
     </div>
