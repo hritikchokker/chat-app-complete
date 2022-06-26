@@ -9,7 +9,7 @@ export const ChatMessagesModel = (sequelize: Sequelize) => {
         allowNull: false,
       },
       roomId: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       sendersId: {
@@ -23,6 +23,7 @@ export const ChatMessagesModel = (sequelize: Sequelize) => {
       messageStatus: {
         type: DataTypes.STRING,
         values: ['1', '2', '3'], // 1= sent , 2=delivered, 3=read
+        defaultValue: '1'
       },
       message: {
         type: DataTypes.STRING,
@@ -32,7 +33,7 @@ export const ChatMessagesModel = (sequelize: Sequelize) => {
     {
       timestamps: true,
       freezeTableName: true,
-      modelName: 'User',
+      modelName: 'ChatMessage',
     }
   );
 };

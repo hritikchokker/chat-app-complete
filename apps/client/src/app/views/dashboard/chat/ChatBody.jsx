@@ -24,6 +24,9 @@ function ChatBody() {
       socketInstance.emit('create/update_room', {
         roomId: getRoomId(userDetails.uid, userId),
       });
+      socketInstance.on('message_list', (list) => {
+        console.log(list, 'on message list');
+      });
     }
     socketInstance.on('user_typing', (payload) => {
       if (roomId === payload.roomId && payload.userId !== userId) {
@@ -31,11 +34,11 @@ function ChatBody() {
       }
     });
     socketInstance.on('message', (data) => {
-      console.log(data, 'datas');
-      const { roomId, listArr } = data;
-      if (roomId === getRoomId(userDetails.uid, userId)) {
-        setList(listArr);
-      }
+      console.log(data, 'datas message');
+      // const { roomId, listArr } = data;
+      // if (roomId === getRoomId(userDetails.uid, userId)) {
+      //   setList(listArr);
+      // }
     });
     // socketInstance
     //   .in(getRoomId(userDetails.uid, userId))
@@ -44,7 +47,6 @@ function ChatBody() {
     //     setList(listArr);
     //   });
   }, [roomId, userDetails.uid, userId]);
-  console.log(list, 'list ss', isOtherUserTyping, 'isotherusertyping');
   return (
     <div className="chat_wrapper_m_content_body">
       {list.map((el) => (

@@ -14,12 +14,6 @@ export class ChatManager {
 
   private listenForChat(): void {
     const chatMessageController = new ChatMessageController(this.socket, this.dbInstance);
-    this.socket.on('chat_messages', ({ content, to }) => {
-      // this.socket.to(to).emit('chat_messages',{
-      //     content,
-      //     from:this.socket
-      // })
-    });
   }
 
 }

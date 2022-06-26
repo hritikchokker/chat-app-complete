@@ -23,9 +23,14 @@ function ChatMessageField() {
       setRoomId(getRoomId(userDetails.uid, userId));
     }
   }, [roomId, userDetails.uid, userId]);
-  const handleMessage = () => {
+  const handleMessage = (e) => {
+    if (e && e.code !== 'Enter') {
+      return;
+    }
     socketInstance.emit('message', {
-      msg: messageField,
+      message: messageField,
+      sendersId: userDetails.uid,
+      receiversId: userId,
       roomId: getRoomId(userDetails.uid, userId),
     });
     setMessageField('');
@@ -52,6 +57,7 @@ function ChatMessageField() {
         <input
           value={messageField}
           onFocus={onFocus}
+          onKeyUp={handleMessage}
           onBlur={onBlur}
           onChange={onInputChange}
           placeholder="Send a message"

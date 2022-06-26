@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize, Op } from 'sequelize';
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { ResponseHandler } from '../../utils/ResponseHandler';
@@ -272,8 +272,17 @@ export class UserController {
         });
       }
       const userModel = sequeLizeInstance.models.user;
+      if (!req?.headers?.authorization) {
+        return responseHandler.sendResponse(res, 401, {
+          message: 'no auth token found',
+        });
+      }
+      const { uid } = await tokenService.decodeToken(
+        req?.headers?.authorization
+      );
       const data = await userModel.findAll({
         attributes: { exclude: ['password'] },
+        where: { uid: { [Op.ne]: uid } }
       });
       return responseHandler.sendResponse(res, 200, {
         count: data.length,

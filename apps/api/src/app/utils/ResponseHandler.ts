@@ -5,4 +5,8 @@ export class ResponseHandler {
     res.status(status).json({ ...payload });
     return;
   }
+
+  sendNonHTTPResponse(error) {
+    return error;
+  }
 }
